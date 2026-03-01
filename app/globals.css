@@ -50,3 +50,32 @@ a {
   overflow: visible !important;
   clip: auto !important;
 }
+
+/* Continuous vertical marquee for landmark judgments */
+@keyframes marquee-vertical {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+.marquee {
+  overflow: hidden;
+}
+
+.marquee-track {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  animation: marquee-vertical var(--marquee-duration, 18s) linear infinite;
+}
+
+/* Pause animation when user hovers over the marquee container */
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+/* Reduce motion for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation: none;
+  }
+}
